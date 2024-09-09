@@ -14,7 +14,7 @@ const Welcome = () => {
                 onPress={() => navigation.navigate("Modal")}
             >
 
-                <Text>
+                <Text style={{ fontSize: 20, color: 'white' }}>
                     Make a Note
                 </Text>
             </Pressable>

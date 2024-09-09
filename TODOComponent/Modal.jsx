@@ -1,18 +1,55 @@
 import { StyleSheet, Text, TextInput, View, Modal, Pressable } from 'react-native'
 import React, { useState } from 'react'
+import { sendData } from './Services';
+import Home from './Home';
 
 const ModalComponent = () => {
     const [modalVisible, setModalVisible] = useState(false);
     const [Task, setTask] = useState('')
+
+    const handleChange = () => {
+        const data1 = {
+            id: Date.now(),
+            task: Task,
+            Date: Date.now(),
+            status: 'f'
+        }
+
+        fetch('https://sheetdb.io/api/v1/cmt0o55gau3l3', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data: [
+                    data1
+                ]
+            })
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setModalVisible(!modalVisible)
+                console.warn(data)
+            });
+
+        ;
+    }
+
     return (
 
         <View style={styles.centeredView}>
+
+
+            <Text style={{ color: 'white', fontSize: 25, margin: 10, marginTop: 20, marginLeft: 20 }}>Todo List</Text>
+
+
             <Modal
                 animationType='fade'
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
-                    Alert.alert('Modal has been closed.');
+                   
                     setModalVisible(!modalVisible);
                 }}>
                 <View style={styles.centeredView}>
@@ -21,6 +58,7 @@ const ModalComponent = () => {
                         <TextInput
                             style={styles.input}
                             multiline={true}
+                            blurOnSubmit={true}
                             numberOfLines={4} // Set the number of lines you want the text area to have
                             value={Task}
                             onChangeText={(newText) => setTask(newText)}
@@ -28,17 +66,23 @@ const ModalComponent = () => {
                         />
                         <Pressable
                             style={[styles.button, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}>
+                            onPress={handleChange}>
                             <Text style={styles.textStyle}>Submit</Text>
                         </Pressable>
                     </View>
                 </View>
             </Modal>
+
+
             <Pressable
-                style={{backgroundColor:'orange',padding:20,margin:10,borderRadius:15}}
+                style={{ backgroundColor: '#fb8500', padding: 20, margin: 10, borderRadius: 15 }}
                 onPress={() => setModalVisible(true)}>
                 <Text style={styles.textStyleBtn}>Add a Task </Text>
             </Pressable>
+
+            <Home />
+
+
 
 
         </View>
@@ -58,7 +102,7 @@ const styles = StyleSheet.create({
     modalView: {
         margin: 20,
         marginTop: 100,
-        backgroundColor: 'orange',
+        backgroundColor: '#fb8500',
         borderRadius: 20,
         padding: 20,
         alignItems: 'center',
@@ -96,10 +140,10 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     textStyleBtn: {
-        color: 'black',
+        color: '#000',
         fontWeight: 'bold',
         textAlign: 'center',
-        fontSize: 15
+        fontSize: 18
     },
     modalText: {
         color: 'black',
@@ -108,7 +152,8 @@ const styles = StyleSheet.create({
     },
     input: {
         width: 300,
-        color: 'black',
+        backgroundColor: 'black',
+        color: 'white',
         height: 150,
         margin: 10,
         marginTop: 20,
