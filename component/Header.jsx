@@ -5,7 +5,15 @@ const Header = () => {
     return (
         <>
             <View>
-                <Text style={{ color: 'white', margin: 10, marginLeft: 22, fontSize: 25, marginTop: 40, fontWeight: '500' }}>Find your dream jobs!</Text>
+                <Text
+                    style={{
+                        color: 'white',
+                        margin: 10,
+                        marginLeft: 22,
+                        fontSize: 25,
+                        marginTop: 10,
+                        fontWeight: '500'
+                    }}>Find your dream jobs!</Text>
             </View>
             <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                 <TextInput

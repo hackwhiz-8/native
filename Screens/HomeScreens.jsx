@@ -9,7 +9,7 @@ import Recommended from '../component/Recommended';
 
 
 const HomeScreens = () => {
-    const navigation = useNavigation();
+    // const navigation = useNavigation();
     return (
 
         <View style={{ backgroundColor: 'black', height: '100%' }}>
