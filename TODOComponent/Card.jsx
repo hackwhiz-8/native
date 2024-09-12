@@ -61,7 +61,7 @@ const Card = (props) => {
                 <Image source={Status === false ?
                     require('../TODOComponent/assests/undone.png') :
                     require('../TODOComponent/assests/done.png')}
-                    style={{ width: 10, height: 20, padding: 10 }}
+                    style={{ width: 25, height: 20, }}
                 />
             </Pressable>
 
@@ -94,9 +94,10 @@ const Card = (props) => {
                 }}>
                 <View style={styles.centeredView}>
                     <View style={styles.modalView}>
-                        <Text style={styles.modalText}>Edit Task</Text>
+                        <Text style={[styles.modalText, { fontWeight: '500' }]}>Edit Task</Text>
                         <TextInput
                             style={styles.input}
+                            selectionColor={'orange'}
                             multiline={true}
                             numberOfLines={4} // Set the number of lines you want the text area to have
                             value={editedText}
@@ -163,7 +164,8 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
-        fontSize: 15
+        fontSize: 15,
+        paddingHorizontal: 20
     },
     textStyleBtn: {
         color: 'black',
